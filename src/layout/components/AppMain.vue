@@ -17,7 +17,11 @@ const goBack = () => {
   window.history.go(-1);
 };
 const copyFullPath = () => {
-  copy(route.fullPath);
+  const copyStr = {
+    path: route.fullPath,
+    dependencies: route.meta.dependencies
+  };
+  copy(JSON.stringify(copyStr));
 }
 </script>
 
