@@ -147,7 +147,7 @@ import {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .approve {
   display: flex;
   .userInfo {

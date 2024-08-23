@@ -1,6 +1,6 @@
 <template>
   <div class="queryList">
-    <el-form :inline="true" :rules="rules" :model="queryParams" class="queryCard">
+    <el-form :inline="true" label-width="80px" :rules="rules" :model="queryParams" class="queryCard">
       <el-form-item label="姓名" prop="name">
         <el-input v-model="queryParams.name" placeholder="请输入完整姓名" />
       </el-form-item>
@@ -188,6 +188,9 @@ const resetQuery = () => {
     }
     .el-select {
       --el-select-width: 200px;
+    }
+    :deep(.el-date-editor) {
+      width: 200px;
     }
   }
   .tableList {

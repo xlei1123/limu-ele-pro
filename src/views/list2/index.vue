@@ -1,6 +1,6 @@
 <template>
   <div class="queryList">
-    <el-form :inline="true" :rules="rules" :model="queryParams" class="queryCard">
+    <el-form :inline="true" label-width="80px" :rules="rules" :model="queryParams" class="queryCard">
       <el-form-item label="姓名" prop="name">
         <el-input v-model="queryParams.name" placeholder="请输入完整姓名" />
       </el-form-item>
@@ -16,7 +16,7 @@
           <el-option label="Zone two" value="beijing" />
         </el-select>
       </el-form-item>
-      <el-form-item label="自定义函数校验" prop="funT">
+      <el-form-item label="函数校验" prop="funT">
         <el-input v-model="queryParams.funT" maxlength="10" placeholder="请输入" clearable />
       </el-form-item>
       <el-form-item label="注册时间">
@@ -262,6 +262,9 @@ const visibleFlagClose = async () => {
     }
     .el-select {
       --el-select-width: 200px;
+    }
+    :deep(.el-date-editor) {
+      width: 200px;
     }
   }
   .tableList {

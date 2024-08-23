@@ -104,7 +104,7 @@ import {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .userInfo {
   padding: 33px;
   background-color: #fff;

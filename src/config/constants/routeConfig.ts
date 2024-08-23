@@ -25,6 +25,11 @@ export default [
     component: () => import('@/views/list3/index.vue')
   },
   {
+    path: 'limu-dashboard',
+    meta: { title: '工作台' },
+    component: () => import('@/views/limu-dashboard/index.vue')
+  },
+  {
     path: 'detail1',
     meta: { title: '用户详情' },
     component: () => import('@/views/detail1/index.vue')
@@ -39,5 +44,9 @@ export default [
     meta: { title: '自定义审批流' },
     component: () => import('@/views/detail3/index.vue')
   },
-  
+  {
+    path: 'basicDetail',
+    meta: { title: '基础详情页' },
+    component: () => import('@/views/basicDetail/index.vue')
+  },
 ];
