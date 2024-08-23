@@ -31,8 +31,13 @@ export default [
   },
   {
     path: 'detail2',
-    meta: { title: '详情查看2' },
+    meta: { title: '审批流详情' },
     component: () => import('@/views/detail2/index.vue')
+  },
+  {
+    path: 'detail3',
+    meta: { title: '自定义审批流' },
+    component: () => import('@/views/detail3/index.vue')
   },
   
 ];
