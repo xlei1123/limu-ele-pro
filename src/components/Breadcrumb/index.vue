@@ -8,14 +8,9 @@
 <script setup lang="ts">
 import { onBeforeMount, ref, watch } from 'vue';
 import { useRoute, RouteLocationMatched } from 'vue-router';
-import { compile } from 'path-to-regexp';
 
 const currentRoute = useRoute();
-const pathCompile = (path: string) => {
-  const { params } = currentRoute;
-  const toPath = compile(path);
-  return toPath(params);
-};
+
 
 const breadcrumbs = ref([] as Array<RouteLocationMatched>);
 

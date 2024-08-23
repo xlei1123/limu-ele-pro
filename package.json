@@ -1,5 +1,5 @@
 {
-  "name": "html-vue",
+  "name": "limu-paste",
   "version": "1.0.0",
   "scripts": {
     "start": "vite serve --mode development",
@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^1.0.0",
+    "axios": "^1.7.4",
     "copy-to-clipboard": "^3.3.3",
     "element-plus": "^2.2.5",
     "mockjs": "^1.1.0",
