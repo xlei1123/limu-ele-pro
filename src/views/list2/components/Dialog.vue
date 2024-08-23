@@ -29,9 +29,6 @@ const props = defineProps({
 });
 const emit = defineEmits(['close']);
 
-
-
-
 const handleCancel = () => {
   emit('close');
 };
