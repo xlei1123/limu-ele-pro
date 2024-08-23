@@ -4,9 +4,9 @@
       <img alt="logoIcon" class="logoIcon" src="/favicon.ico" />
       <p class="slogan">LIMU - 页面复制开发</p>
     </header>
-    <main>
-      
-    </main>
+    <div>
+      <a href="https://marketplace.visualstudio.com/items?itemName=leixiang.limu-paste&ssr=false#review-details">limu-paste - vscode插件下载</a>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -14,7 +14,6 @@ export default { name: 'Dashboard' };
 </script>
 
 <script setup lang="ts">
-import TheWelcome from './components/TheWelcome.vue';
 </script>
 
 <style lang="scss" scoped>
