@@ -94,16 +94,42 @@
     </div>
     <div class="process">
       <h4 class="tit">开设申请审批流程</h4>
-      <el-timeline style="max-width: 380px">
-        <el-timeline-item
-          v-for="(activity, index) in activities"
-          :key="index"
-          :timestamp="activity.timestamp"
-          :type="activity.type"
-        >
-          {{ activity.content }}
-        </el-timeline-item>
-      </el-timeline>
+      <div>
+        <div class="content success">
+          <h5 class="stepTit"><el-icon class="icon"><Check /></el-icon>提交申请</h5>
+          <div class="detail">
+            <div class="name">
+              姓名：张三
+            </div>
+            <div>
+              时间：2024-06-20 13:23:45
+            </div>
+          </div>
+        </div>
+        <div class="content pending">
+          <h5 class="stepTit"><el-icon class="icon"><Check /></el-icon>系统验证</h5>
+          <div class="detail">
+            <div class="name">
+              姓名：张三
+            </div>
+            <div>
+              时间：2024-06-20 13:23:45
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <h5 class="stepTit"><el-icon class="icon"><Check /></el-icon>省中心初审</h5>
+          <div class="detail">
+            
+          </div>
+        </div>
+        <div class="content">
+          <h5 class="stepTit"><el-icon class="icon"><Check /></el-icon>中心终审</h5>
+          <div class="detail">
+            
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   
@@ -116,28 +142,9 @@ import {
   Location,
   School,
   User,
+  Check
 } from '@element-plus/icons-vue';
 
-const activities = [
-  {
-    content: '提交申请',
-    timestamp: '2018-04-08',
-    type: 'success'
-  },
-  {
-    content: '系统验证',
-    timestamp: '2018-04-08',
-    type: 'warning'
-  },
-  {
-    content: '省中心初审',
-    timestamp: '2018-04-11',
-  },
-  {
-    content: '中心初审',
-    timestamp: '2018-04-13',
-  },
-];
 </script>
 
 <style lang="scss">
@@ -223,6 +230,46 @@ const activities = [
         margin-right: 6px;
       }
     }
+    .content {
+      padding: 10px 30px 0;
+      .stepTit {
+        margin-top: 0px;
+        margin-bottom: 2px;
+        color: #767676;
+        .icon {
+          width: 14px;
+          margin-right: 20px;
+        }
+      }
+      .detail {
+        margin-left: 7px;
+        padding: 18px 0;
+        padding-left: 28px;
+        border-left: 1px solid #e8ecef;
+        color: #767676;
+        .name {
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .success {
+      .stepTit {
+        color: #00D097;
+      }
+      
+    }
+    .success{
+      .detail {
+        color: #767676;
+      }
+    }
+    .pending {
+      .stepTit, .detail {
+        color: #2077FF;
+      }
+      
+    }
+    
   }
 }
 
