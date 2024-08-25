@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 import type { FormInstance } from 'element-plus';
 
 const shortcuts = [
