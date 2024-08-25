@@ -30,8 +30,8 @@ import Step3 from './compontens/Step3.vue';
 
 const active = ref(0);
 
-const submit = (value) => {
-  console.log('步骤'+active+'的结果：', value);
+const submit = (value: any) => {
+  console.log('步骤'+active.value+'的结果：', value);
   active.value = active.value + 1;
   // TODO 这里写请求之类的其他逻辑
 }
