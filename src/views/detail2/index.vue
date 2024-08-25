@@ -122,12 +122,12 @@ const activities = [
   {
     content: '提交申请',
     timestamp: '2018-04-08',
-    type: 'success'
+    type: 'success' as const
   },
   {
     content: '系统验证',
     timestamp: '2018-04-08',
-    type: 'warning'
+    type: 'warning' as const
   },
   {
     content: '省中心初审',

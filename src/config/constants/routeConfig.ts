@@ -49,4 +49,14 @@ export default [
     meta: { title: '基础详情页' },
     component: () => import('@/views/basicDetail/index.vue')
   },
+  {
+    path: 'basicForm',
+    meta: { title: '表单提交页' },
+    component: () => import('@/views/basicForm/index.vue')
+  },
+  {
+    path: 'stepForm',
+    meta: { title: '分步表单' },
+    component: () => import('@/views/stepForm/index.vue')
+  },
 ];
