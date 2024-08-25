@@ -282,6 +282,8 @@ const multipleAction = async () => {
   overflow: hidden;
   border-radius: 2px 2px 0px 0px;
   .queryCard {
+    display: flex;
+    flex-wrap: wrap;
     margin-bottom: 16px;
     padding: 20px 20px 0;
     background-color: #fff;
