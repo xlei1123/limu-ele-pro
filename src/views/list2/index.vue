@@ -1,6 +1,6 @@
 <template>
   <div class="queryList">
-    <el-form :inline="true" label-width="80px" :rules="rules" :model="queryParams" class="queryCard">
+    <el-form :inline="true" ref="ruleFormRef" label-width="80px" :rules="rules" :model="queryParams" class="queryCard">
       <el-form-item label="姓名" prop="name">
         <el-input v-model="queryParams.name" placeholder="请输入完整姓名" />
       </el-form-item>
@@ -32,7 +32,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="resetQuery" plain>重置</el-button>
-        <el-button type="primary" @click="handleSearch">查询</el-button>
+        <el-button type="primary" @click="handleSearch(ruleFormRef)">查询</el-button>
       </el-form-item>
     </el-form>
     <div class="tableList">
@@ -79,6 +79,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import type { FormInstance } from 'element-plus';
 import Mock from 'mockjs'; // mock数据用
 import LimuPagination from '@/components/LimuPagination/index.vue';
 import EditDialog from './components/EditDialog.vue';
@@ -186,9 +187,18 @@ const getDataList = async () => {
 };
 getDataList();
 
-const handleSearch = async () => {
-  currentPage.value = 1;
-  getDataList();
+const ruleFormRef = ref<FormInstance>();
+const handleSearch = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate((valid, fields) => {
+    if (valid) {
+      currentPage.value = 1;
+      getDataList();
+      console.log('submit!')
+    } else {
+      console.log('error submit!', fields)
+    }
+  });
 };
 
 // 重置
@@ -250,7 +260,6 @@ const visibleFlagClose = async () => {
 
 <style scoped lang="scss">
 .queryList {
-  padding: 20px;
   overflow: hidden;
   border-radius: 2px 2px 0px 0px;
   .queryCard {
