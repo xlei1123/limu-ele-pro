@@ -12,7 +12,7 @@
     "@element-plus/icons-vue": "^1.0.0",
     "axios": "^1.7.4",
     "copy-to-clipboard": "^3.3.3",
-    "element-plus": "^2.2.5",
+    "element-plus": "^2.8.1",
     "mockjs": "^1.1.0",
     "npm": "^10.1.0",
     "nprogress": "^0.2.0",

@@ -73,7 +73,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import LimuPagination from '@/components/LimuPagination/index.vue';
-import Mock from 'mockjs'; // mock数据用
+import Mock from 'mockjs'; //  mock数据用 你的页面应该删除mock数据
 import type { FormInstance } from 'element-plus';
 
 const shortcuts = [

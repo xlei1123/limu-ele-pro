@@ -25,6 +25,16 @@ export default [
     component: () => import('@/views/list3/index.vue')
   },
   {
+    path: 'listEdit',
+    meta: { title: '页面-列表-编辑' },
+    component: () => import('@/views/listEdit/index.vue')
+  },
+  {
+    path: 'newsSetList',
+    meta: { title: '页面-列表-消息设置' },
+    component: () => import('@/views/newsSetList/index.vue')
+  },
+  {
     path: 'limu-dashboard',
     meta: { title: '工作台' },
     component: () => import('@/views/limu-dashboard/index.vue')
@@ -58,5 +68,5 @@ export default [
     path: 'stepForm',
     meta: { title: '分步表单' },
     component: () => import('@/views/stepForm/index.vue')
-  },
+  }
 ];
