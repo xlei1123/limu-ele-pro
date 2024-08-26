@@ -4,7 +4,9 @@
   "scripts": {
     "start": "vite serve --mode development",
     "build": "vue-tsc --noEmit && vite build --mode production",
-    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint --config eslint.config.js src/**/*"
+    "lint": "eslint src/**/*.{ts,js,vue} --fix",
+    "prepare": "husky install",
+    "prettier": "prettier --write ."
   },
   "dependencies": {
     "@element-plus/icons-vue": "^1.0.0",
@@ -21,11 +23,12 @@
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
     "@eslint/js": "^9.9.1",
+    "@types/mockjs": "^1.0.10",
     "@types/node": "^16.11.7",
     "@vitejs/plugin-vue": "^1.9.3",
-    "eslint": "^9.9.1",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-vue": "^9.27.0",
+    "eslint": "^8.14.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.6.0",
     "globals": "^15.9.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.7",

@@ -1,17 +1,14 @@
 <template>
   <div class="block">
-    <el-dialog
-      :modelValue="editFlag"
-      title="编辑数据"
-      width="500px"
-      @closed="blockDataClose">
+    <el-dialog :modelValue="editFlag" title="编辑数据" width="500px" @closed="blockDataClose">
       <el-form
         inline
         ref="ruleFormRef"
         label-position="top"
         :rules="rules"
         :model="blockData"
-        class="formEdit">
+        class="formEdit"
+      >
         <el-form-item label="手机号" prop="phone">
           <el-input v-model="blockData.phone" maxlength="10" placeholder="请输入手机号" clearable />
         </el-form-item>
@@ -34,9 +31,7 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="handleCancel">取消</el-button>
-          <el-button type="primary" @click="handleSave">
-            保存
-          </el-button>
+          <el-button type="primary" @click="handleSave"> 保存 </el-button>
         </span>
       </template>
     </el-dialog>
@@ -52,23 +47,23 @@ type Block = {
   org: string;
   sales: string;
   funT?: string;
-}
+};
 
 const props = defineProps({
   editFlag: {
     required: true,
     type: Boolean,
-    default: false,
+    default: false
   },
   initBlockData: {
     required: true,
-    type:  Object as () => Block,
-  },
+    type: Object as () => Block
+  }
 });
 const emit = defineEmits(['close']);
 
-const checkNumber = (rule: any, value: any, callback: any) => {
-  if (!value || (/^[1-9]\d{0,9}$/.test(value))) {
+const checkNumber = (_rule: any, value: any, callback: any) => {
+  if (!value || /^[1-9]\d{0,9}$/.test(value)) {
     callback();
   } else {
     callback(new Error('只能输入最多10位正整数'));
@@ -79,14 +74,10 @@ const ruleFormRef = ref<FormInstance>();
 const rules = reactive<FormRules>({
   phone: [
     { required: true, message: '请输入手机号' },
-    {pattern: /^1[0-9]{10}$/, message: '请输入11位手机号'}
+    { pattern: /^1[0-9]{10}$/, message: '请输入11位手机号' }
   ],
-  org: [
-    { required: true, message: '请选择所属机构' }
-  ],
-  sales: [
-    { required: true, message: '请选择代销者' }
-  ],
+  org: [{ required: true, message: '请选择所属机构' }],
+  sales: [{ required: true, message: '请选择代销者' }],
   funT: [
     { required: true, message: '请输入' },
     { validator: checkNumber, trigger: 'change' }
@@ -100,7 +91,6 @@ const blockData = ref({
 watchEffect(() => {
   blockData.value = { ...(props.initBlockData || {}) };
 });
-
 
 const handleCancel = () => {
   blockData.value = { ...props.initBlockData };
@@ -124,7 +114,7 @@ const blockDataClose = async () => {
 <style scoped lang="scss">
 .formEdit {
   .el-input {
-  --el-input-width: 200px;
+    --el-input-width: 200px;
   }
 
   .el-select {

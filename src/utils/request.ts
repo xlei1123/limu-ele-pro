@@ -1,7 +1,6 @@
-import axios, { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import { ElMessage } from 'element-plus';
 
-const sm4KeyMap = new Map();
 // 创建 axios 实例
 const service = axios.create({
   timeout: 50000,
@@ -21,7 +20,7 @@ service.interceptors.request.use(
 
     return config;
   },
-  (error) => {
+  (error: string) => {
     return Promise.reject(error);
   }
 );

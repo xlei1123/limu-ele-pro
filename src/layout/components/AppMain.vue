@@ -1,7 +1,9 @@
 <template>
   <section class="app-main">
     <div class="currentRouteTitle">
-      {{ route.meta.title }} <el-button type="primary" @click="copyFullPath">复制该页面</el-button><el-button class="back-btn" v-if="route.meta.hidden" text @click="goBack"> 返回</el-button>
+      {{ route.meta.title }}
+      <el-button type="primary" @click="copyFullPath">复制该页面</el-button>
+      <el-button class="back-btn" v-if="route.meta.hidden" text @click="goBack"> 返回</el-button>
     </div>
     <router-view />
   </section>
@@ -22,11 +24,10 @@ const copyFullPath = () => {
     dependencies: route.meta.dependencies
   };
   copy(JSON.stringify(copyStr));
-}
+};
 </script>
 
 <style lang="scss" scoped>
-
 .app-main {
   max-height: calc(100vh);
   width: 100%;
@@ -34,9 +35,8 @@ const copyFullPath = () => {
   overflow-y: auto;
   margin: 0 10px;
   padding: 10px 20px 20px 10px;
-  background-color: #F7F8FA;
+  background-color: #f7f8fa;
 }
-
 
 .back-btn {
   position: absolute;

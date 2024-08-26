@@ -1,6 +1,13 @@
 <template>
   <div class="queryList">
-    <el-form :inline="true" ref="ruleFormRef" label-width="80px" :rules="rules" :model="queryParams" class="queryCard">
+    <el-form
+      :inline="true"
+      ref="ruleFormRef"
+      label-width="80px"
+      :rules="rules"
+      :model="queryParams"
+      class="queryCard"
+    >
       <el-form-item label="姓名" prop="name">
         <el-input v-model="queryParams.name" placeholder="请输入完整姓名" />
       </el-form-item>
@@ -47,7 +54,7 @@
         style="width: 100%"
         v-loading="tableLoading"
         @selection-change="handleSelectionChange"
-        >
+      >
         <el-table-column type="selection" width="55" />
         <el-table-column type="index" width="70" label="序号" />
         <el-table-column prop="name" label="姓名" />
@@ -58,9 +65,15 @@
         <el-table-column prop="createTime" label="注册时间" />
         <el-table-column fixed="right" label="操作" width="140">
           <template #default="scope">
-            <el-button link type="primary" size="small" @click="handleEdit(scope.row)">编辑</el-button>
-            <el-button link type="primary" size="small" @click="handleDel(scope.row.id)">删除</el-button>
-            <el-button link type="primary" size="small" @click="visibleFlagHandle(scope.row.id)">其他</el-button>
+            <el-button link type="primary" size="small" @click="handleEdit(scope.row)">
+              编辑
+            </el-button>
+            <el-button link type="primary" size="small" @click="handleDel(scope.row.id)">
+              删除
+            </el-button>
+            <el-button link type="primary" size="small" @click="visibleFlagHandle(scope.row.id)">
+              其他
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -73,16 +86,9 @@
         />
       </div>
     </div>
-    
-    <EditDialog
-      :editFlag="editFlagHandle"
-      :initBlockData="blockData"
-      @close="handleClose"
-    />
-    <Dialog
-      :visibleFlag="visibleFlag"
-      @close="visibleFlagClose"
-    />
+
+    <EditDialog :editFlag="editFlagHandle" :initBlockData="blockData" @close="handleClose" />
+    <Dialog :visibleFlag="visibleFlag" @close="visibleFlagClose" />
   </div>
 </template>
 
@@ -95,40 +101,39 @@ import LimuPagination from '@/components/LimuPagination/index.vue';
 import EditDialog from './components/EditDialog.vue';
 import Dialog from './components/Dialog.vue';
 
-
 const shortcuts = [
   {
     text: '最近一周',
     value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-      return [start, end]
-    },
+      const end = new Date();
+      const start = new Date();
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+      return [start, end];
+    }
   },
   {
     text: '最近一个月',
     value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-      return [start, end]
-    },
+      const end = new Date();
+      const start = new Date();
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+      return [start, end];
+    }
   },
   {
     text: '最近三个月',
     value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-      return [start, end]
-    },
-  },
+      const end = new Date();
+      const start = new Date();
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+      return [start, end];
+    }
+  }
 ];
 
 // 查询校验
-const checkNumber = (rule: any, value: any, callback: any) => {
-  if (!value || (/^[1-9]\d{0,9}$/.test(value))) {
+const checkNumber = (_rule: any, value: any, callback: any) => {
+  if (!value || /^[1-9]\d{0,9}$/.test(value)) {
     callback();
   } else {
     callback(new Error('只能输入最多10位正整数'));
@@ -136,19 +141,14 @@ const checkNumber = (rule: any, value: any, callback: any) => {
 };
 const rules = {
   name: [
-  {
-    pattern: /^(?=.{1,20}$)(?!.*([·])\1)[\u4e00-\u9fa5]{1,}[\u4e00-\u9fa5·]{0,}[\u4e00-\u9fa5]+$/, message: '最多20位,不能以·开头结尾,·不能连续'
-  }
+    {
+      pattern: /^(?=.{1,20}$)(?!.*([·])\1)[\u4e00-\u9fa5]{1,}[\u4e00-\u9fa5·]{0,}[\u4e00-\u9fa5]+$/,
+      message: '最多20位,不能以·开头结尾,·不能连续'
+    }
   ],
-  phone: [
-    {pattern: /^1[0-9]{10}$/, message: '请输入11位手机号'}
-  ],
-  idCard: [
-    {pattern: /^[0-9]{17}([0-9]|X)$/, message: '请输入正确的身份证号'},
-  ],
-  funT: [
-    { validator: checkNumber, trigger: 'change' }
-  ]
+  phone: [{ pattern: /^1[0-9]{10}$/, message: '请输入11位手机号' }],
+  idCard: [{ pattern: /^[0-9]{17}([0-9]|X)$/, message: '请输入正确的身份证号' }],
+  funT: [{ validator: checkNumber, trigger: 'change' }]
 };
 // 查询初始值
 const initQueryParams = {
@@ -157,17 +157,21 @@ const initQueryParams = {
   idCard: '',
   org: '',
   funT: '',
-  createTime: '',
-}
+  createTime: ''
+};
 
-const queryParams = ref({...initQueryParams});
+const queryParams = ref({ ...initQueryParams });
 // tabel列表
 const tableLoading = ref(false);
 const tableData: any = ref([]);
 const total = ref(100);
 const currentPage = ref(1);
 const pageSize = ref(10); // limit; start = (currentPage.value-1) * limit;
-const handleUpdate = async (page) => {
+interface Page {
+  currentPage: number;
+  pageSize: number;
+}
+const handleUpdate = async (page: Page) => {
   currentPage.value = page.currentPage;
   pageSize.value = page.pageSize;
   await getDataList();
@@ -178,16 +182,18 @@ const getDataList = async () => {
   tableLoading.value = true;
   // TODO 请求
   const data = Mock.mock({
-    "list|10": [{
-    'name': '@cname', // 中文名
-    'sales': `@word`, // 英文单词
-    'idCard': /1[0-9]{17}/, // 正则模式
-    'phone': /1[3-9][0-9]{9}/, // 正则模式
-    'org': Mock.mock('@cword(2,4)'), // 随机2-4字中文单词
-    'id': '@guid', // guid
-    "createTime":'@datetime'
-   }],
-   "total": 100
+    'list|10': [
+      {
+        name: '@cname', // 中文名
+        sales: '@word', // 英文单词
+        idCard: /1[0-9]{17}/, // 正则模式
+        phone: /1[3-9][0-9]{9}/, // 正则模式
+        org: Mock.mock('@cword(2,4)'), // 随机2-4字中文单词
+        id: '@guid', // guid
+        createTime: '@datetime'
+      }
+    ],
+    total: 100
   });
   setTimeout(() => {
     tableData.value = data.list;
@@ -199,14 +205,14 @@ getDataList();
 
 const ruleFormRef = ref<FormInstance>();
 const handleSearch = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return
+  if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
       currentPage.value = 1;
       getDataList();
-      console.log('submit!')
+      console.log('submit!');
     } else {
-      console.log('error submit!', fields)
+      console.log('error submit!', fields);
     }
   });
 };
@@ -219,36 +225,33 @@ const resetQuery = () => {
 
 // 删除
 const handleDel = (id: number) => {
-  ElMessageBox.confirm(
-    '你确定要删除嘛？',
-    '确认提示',
-    {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      // type: 'warning',
-      draggable: true,
-    }
-  )
+  console.log(id);
+  ElMessageBox.confirm('你确定要删除嘛？', '确认提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    // type: 'warning',
+    draggable: true
+  })
     .then(() => {
       // TODO 确认删除 请求删除接口
       ElMessage({
         type: 'success',
-        message: '删除成功',
-      })
+        message: '删除成功'
+      });
     })
     .catch(() => {
       // 取消
       ElMessage({
         type: 'info',
-        message: '已取消删除',
+        message: '已取消删除'
       });
-    })
+    });
 };
 
 // 编辑
 const editFlagHandle = ref(false);
 const blockData = ref<any>({});
-const handleEdit = async (data) => {
+const handleEdit = async (data: any) => {
   editFlagHandle.value = true;
   blockData.value = data;
 };
@@ -256,25 +259,25 @@ const handleEdit = async (data) => {
 const handleClose = async () => {
   blockData.value = {};
   editFlagHandle.value = false;
-}
+};
 
 // 其他
 const visibleFlag = ref(false);
-const visibleFlagHandle = (val: string) => {
+const visibleFlagHandle = (_val: string) => {
   visibleFlag.value = true;
-}
+};
 const visibleFlagClose = async () => {
   visibleFlag.value = false;
-}
+};
 
-const multipleSelection = ref([]);
-const handleSelectionChange = async (val) => {
+const multipleSelection = ref<any[]>([]);
+const handleSelectionChange = async (val: any[]) => {
   multipleSelection.value = val;
-}
+};
 const multipleAction = async () => {
   // TODO 请求接口
   await getDataList();
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -306,7 +309,7 @@ const multipleAction = async () => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
     span {
       display: flex;
       align-items: center;
@@ -320,7 +323,7 @@ const multipleAction = async () => {
         content: '';
         width: 4px;
         height: 10px;
-        background-color: #2077FF;
+        background-color: #2077ff;
         border-radius: 2px;
       }
     }
