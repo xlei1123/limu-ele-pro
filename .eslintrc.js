@@ -24,14 +24,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:vue/vue3-essential',
-    'plugin:@typescript-eslint/recommended',
-    // 'plugin:prettier/recommended',
-    // eslint-config-prettier 的缩写
-    // 'prettier',
-    // 解决使用自动导入api报错
-    './.eslintrc-auto-import.json'
-    // 单独解决使用vue api时报错
-    // 'vue-global-api',
+    'plugin:@typescript-eslint/recommended'
   ],
   parser: 'vue-eslint-parser', // 指定要使用的解析器
   // 给解析器传入一些其他的配置参数
@@ -48,9 +41,12 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off', // 关闭any类型的警告
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
+    'no-unused-vars': ['warn'],
+    '@typescript-eslint/no-unused-vars': ['warn'],
+    'vue/no-unused-vars': ['warn'],
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
     'max-len': ['error', { code: 100 }],
-    'linebreak-style': ['warning', 'unix']
+    'linebreak-style': ['warn', 'unix']
   }
 };

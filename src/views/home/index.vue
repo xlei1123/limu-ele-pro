@@ -23,9 +23,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const active = ref(1)
+const active = ref(1);
 </script>
 
 <style lang="scss" scoped>

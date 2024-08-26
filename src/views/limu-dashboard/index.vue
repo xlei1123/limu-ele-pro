@@ -3,20 +3,11 @@
     <div class="basicInfo">
       <el-avatar :icon="UserFilled" :size="62" />
       <div class="info">
-        <div class="name">
-          早安，吴彦祖，祝你开心每一天！
-        </div>
-        <div class="welcome">
-          交互专家 |某某公司－某某某事业群－某某平台部－某某技术部－UED
-        </div>
+        <div class="name">早安，吴彦祖，祝你开心每一天！</div>
+        <div class="welcome">交互专家 |某某公司－某某某事业群－某某平台部－某某技术部－UED</div>
       </div>
     </div>
-    <el-descriptions
-      direction="vertical"
-      :column="3"
-      align="center"
-      class="moreInfo"
-    >
+    <el-descriptions direction="vertical" :column="3" align="center" class="moreInfo">
       <el-descriptions-item label="项目数"><b>31</b></el-descriptions-item>
       <el-descriptions-item label="团队内排名"><b>8 / 24</b></el-descriptions-item>
       <el-descriptions-item label="项目访问"><b>2,223</b></el-descriptions-item>
@@ -31,22 +22,24 @@
           </div>
         </template>
         <div class="projects">
-          <el-card shadow="hover"class="project" v-for="project in projects" :key="project.title">
+          <el-card shadow="hover" class="project" v-for="project in projects" :key="project.title">
             <div>
-              <p class="title"><el-avatar :src="project.avatar"/> <span class="titText">{{ project.title }}</span></p>
+              <p class="title">
+                <el-avatar :src="project.avatar" />
+                <span class="titText">{{ project.title }}</span>
+              </p>
               <p class="desc">{{ project.desc }}</p>
-              <p><span class="author">{{ project.author }}</span><span class="time">{{ project.time }}</span></p>
+              <p>
+                <span class="author">{{ project.author }}</span>
+                <span class="time">{{ project.time }}</span>
+              </p>
             </div>
           </el-card>
         </div>
       </el-card>
       <el-card class="trends" header="动态">
         <div class="infiniteWrapper" style="overflow: auto">
-          <ul
-            v-infinite-scroll="load"
-            class="list"
-            :infinite-scroll-disabled="disabled"
-          >
+          <ul v-infinite-scroll="load" class="list" :infinite-scroll-disabled="disabled">
             <li v-for="i in count" :key="i" class="listItem">{{ i }}</li>
           </ul>
           <p v-if="loading">加载中...</p>
@@ -57,12 +50,11 @@
     <div class="right">
       <div class="nav">
         <el-card header="行业最新动态" class="news">
-          <p v-for="item in news" class="item">{{item}}</p>
+          <p v-for="item in news" :key="item">{{ item }}</p>
         </el-card>
       </div>
     </div>
   </div>
-  
 </template>
 
 <script setup lang="ts">
@@ -114,17 +106,17 @@ const projects = ref([
   }
 ]);
 
-const count = ref(10)
-const loading = ref(false)
-const noMore = computed(() => count.value >= 20)
-const disabled = computed(() => loading.value || noMore.value)
+const count = ref(10);
+const loading = ref(false);
+const noMore = computed(() => count.value >= 20);
+const disabled = computed(() => loading.value || noMore.value);
 const load = () => {
-  loading.value = true
+  loading.value = true;
   setTimeout(() => {
-    count.value += 2
-    loading.value = false
-  }, 600)
-}
+    count.value += 2;
+    loading.value = false;
+  }, 600);
+};
 
 const news = ref([
   'Web组件和自定义元素，趋势概述：Web组件技术',
@@ -141,7 +133,7 @@ const news = ref([
   'WebAssembly (Wasm) 的应用',
   '前端开发工具的发展',
   '人工智能和机器学习'
-])
+]);
 </script>
 
 <style lang="scss" scoped>
@@ -213,7 +205,8 @@ const news = ref([
             font-size: 14px;
             color: rgba(0, 0, 0, 0.65);
           }
-          .author, .time {
+          .author,
+          .time {
             font-size: 12px;
             color: rgba(0, 0, 0, 0.65);
           }

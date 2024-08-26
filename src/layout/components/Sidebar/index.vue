@@ -11,8 +11,12 @@
         :collapse-transition="false"
         mode="vertical"
       >
-        <el-menu-item v-for="routeItme in routeConfig" :index="'/' + routeItme.path">
-          <span>{{ routeItme.meta.title }}</span>
+        <el-menu-item
+          v-for="routeItem in routeConfig"
+          :index="'/' + routeItem.path"
+          :key="routeItem.path"
+        >
+          <span>{{ routeItem.meta.title }}</span>
         </el-menu-item>
       </el-menu>
     </el-scrollbar>

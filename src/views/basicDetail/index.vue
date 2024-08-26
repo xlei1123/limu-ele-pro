@@ -17,11 +17,7 @@
     <el-divider />
     <div>
       <h4>退货商品</h4>
-      <el-table
-        :data="refundTable"
-        sum-text="合计"
-        :summary-method="getSummaries"
-        show-summary>
+      <el-table :data="refundTable" sum-text="合计" :summary-method="getSummaries" show-summary>
         <el-table-column prop="id" label="商品编号" width="180" />
         <el-table-column prop="name" label="商品名称" width="180" />
         <el-table-column prop="code" label="商品条码" />
@@ -36,51 +32,51 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import Mock from 'mockjs'; // mock数据用
-import type { VNode } from 'vue'
-import type { TableColumnCtx } from 'element-plus'
+import type { VNode } from 'vue';
 
-
-const getSummaries = (param) => {
+const getSummaries = (param: any) => {
   const { columns, data } = param;
-  const sums: (string | VNode)[] = []
-  columns.forEach((column, index) => {
+  const sums: (string | VNode)[] = [];
+  columns.forEach((column: any, index: number) => {
     if (index === 0) {
-      sums[index] = '合计'
-      return
-    }
-    if(index <4) {
+      sums[index] = '合计';
       return;
     }
-    const values = data.map((item) => Number(item[column.property]))
-    if (!values.every((value) => Number.isNaN(value))) {
-      sums[index] = `${values.reduce((prev, curr) => {
-        const value = Number(curr)
-        if (!Number.isNaN(value)) {
-          return prev + curr
-        } else {
-          return prev
-        }
-      }, 0)}`
-    } else {
-      sums[index] = 'N/A'
+    if (index < 4) {
+      return;
     }
-  })
+    const values = data.map((item: any) => Number(item[column.property]));
+    if (!values.every((value: number) => Number.isNaN(value))) {
+      sums[index] = `${values.reduce((prev: number, curr: number) => {
+        const value = Number(curr);
+        if (!Number.isNaN(value)) {
+          return prev + curr;
+        } else {
+          return prev;
+        }
+      }, 0)}`;
+    } else {
+      sums[index] = 'N/A';
+    }
+  });
 
-  return sums
-}
+  return sums;
+};
 const refundTable = ref([]);
 const getDataList = async () => {
   // TODO 请求
   const data = Mock.mock({
-    "list|4": [{
-    'name': '@cname', // 中文名
-    'price': /[1-9][0-9]/, // 英文单词
-    'code': /1[3-9][0-9]{9}/, // 正则模式
-    'num': 3, // 随机2-4字中文单词
-    'id': /1[3-9][0-9]{9}/, // guid
-    "total": /[1-9][0-9]{2}/
-   }],
-   "total": 100
+    'list|4': [
+      {
+        name: '@cname', // 中文名
+        price: /[1-9][0-9]/, // 英文单词
+        code: /1[3-9][0-9]{9}/, // 正则模式
+        num: 3, // 随机2-4字中文单词
+        id: /1[3-9][0-9]{9}/, // guid
+        total: /[1-9][0-9]{2}/
+      }
+    ],
+    total: 100
   });
   setTimeout(() => {
     refundTable.value = data.list;

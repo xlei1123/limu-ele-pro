@@ -1,6 +1,12 @@
 <template>
   <el-card shadow="never" class="submitForm">
-    <el-form label-width="80px" :rules="rules" ref="ruleFormRef" :model="submitParams" class="queryCard">
+    <el-form
+      label-width="80px"
+      :rules="rules"
+      ref="ruleFormRef"
+      :model="submitParams"
+      class="queryCard"
+    >
       <el-form-item label="姓名" prop="name">
         <el-input v-model="submitParams.name" placeholder="请输入完整姓名" />
       </el-form-item>
@@ -10,7 +16,7 @@
       <el-form-item label="身份证号" prop="idCard">
         <el-input v-model="submitParams.idCard" placeholder="请输入完整身份证号" />
       </el-form-item>
-      
+
       <el-form-item label="函数校验" prop="funT">
         <el-input v-model="submitParams.funT" maxlength="10" placeholder="请输入" clearable />
       </el-form-item>
@@ -56,57 +62,62 @@ const shortcuts = [
   {
     text: '最近一周',
     value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-      return [start, end]
-    },
+      const end = new Date();
+      const start = new Date();
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+      return [start, end];
+    }
   },
   {
     text: '最近一个月',
     value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-      return [start, end]
-    },
+      const end = new Date();
+      const start = new Date();
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+      return [start, end];
+    }
   },
   {
     text: '最近三个月',
     value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-      return [start, end]
-    },
-  },
+      const end = new Date();
+      const start = new Date();
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+      return [start, end];
+    }
+  }
 ];
 
 const rules = {
   name: [
     {
-      required: true, message: '请输入姓名',
+      required: true,
+      message: '请输入姓名'
     },
     {
-      pattern: /^(?=.{1,20}$)(?!.*([·])\1)[\u4e00-\u9fa5]{1,}[\u4e00-\u9fa5·]{0,}[\u4e00-\u9fa5]+$/, message: '最多20位,不能以·开头结尾,·不能连续'
+      pattern: /^(?=.{1,20}$)(?!.*([·])\1)[\u4e00-\u9fa5]{1,}[\u4e00-\u9fa5·]{0,}[\u4e00-\u9fa5]+$/,
+      message: '最多20位,不能以·开头结尾,·不能连续'
     }
   ],
   phone: [
     {
-      required: true, message: '请输入手机号',
+      required: true,
+      message: '请输入手机号'
     },
-    {pattern: /^1[0-9]{10}$/, message: '请输入11位手机号'}
+    { pattern: /^1[0-9]{10}$/, message: '请输入11位手机号' }
   ],
   idCard: [
     {
-      required: true, message: '请输入身份证号',
+      required: true,
+      message: '请输入身份证号'
     },
-    {pattern: /^[0-9]{17}([0-9]|X)$/, message: '请输入正确的身份证号'},
+    { pattern: /^[0-9]{17}([0-9]|X)$/, message: '请输入正确的身份证号' }
   ],
   org: [
     {
-      required: true, message: '请选择',
-    },
+      required: true,
+      message: '请选择'
+    }
   ]
 };
 
@@ -119,22 +130,22 @@ const initsubmitParams = {
   createTime: '',
   public: 0, // 0-不公开 1-部分公开 2-公开
   remark: ''
-}
+};
 
-const submitParams = ref({...initsubmitParams});
+const submitParams = ref({ ...initsubmitParams });
 
 const ruleFormRef = ref<FormInstance>();
 const handleSearch = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return
+  if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
       // TODO 提交请求数据
-      console.log('submit!')
+      console.log('submit!');
     } else {
-      console.log('error submit!', fields)
+      console.log('error submit!', fields);
     }
-  })
-}
+  });
+};
 </script>
 
 <style lang="scss" scoped>

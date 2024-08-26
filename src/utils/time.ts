@@ -8,7 +8,6 @@ export function formatTimeStr(t: string | number, hideHMS?: boolean) {
   const day = t.slice(6, 8);
   const h = t.slice(8, 10);
   const m = t.slice(10, 12);
-  const s = t.slice(12, 14);
   return hideHMS ? `${year}/${month}/${day}日` : `${year}/${month}/${day} ${h}:${m}`;
 }
 
