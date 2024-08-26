@@ -86,7 +86,7 @@
 import { ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import type { FormInstance } from 'element-plus';
-import Mock from 'mockjs'; // mock数据用
+import Mock from 'mockjs'; //  mock数据用 你的页面应该删除mock数据
 import LimuPagination from '@/components/LimuPagination/index.vue';
 import EditDialog from './components/EditDialog.vue';
 import Dialog from './components/Dialog.vue';
@@ -252,7 +252,7 @@ const handleClose = async () => {
 
 // 其他
 const visibleFlag = ref(false);
-const visibleFlagHandle = () => {
+const visibleFlagHandle = (id: number) => {
   visibleFlag.value = true;
 };
 const visibleFlagClose = async () => {
