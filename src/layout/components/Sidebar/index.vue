@@ -42,4 +42,8 @@ const activeMenu = computed(() => {
 :deep(.scrollbar-wrapper) {
   background-color: #fff;
 }
+:deep(.el-menu-item.is-active) {
+  border-right: 3px solid var(--el-menu-active-color);
+  background-color: rgba($color: #2077ff, $alpha: 0.08);
+}
 </style>

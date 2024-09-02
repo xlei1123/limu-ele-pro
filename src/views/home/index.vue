@@ -16,9 +16,9 @@
     </div>
     <div class="video">
       <h4>演示：</h4>
-      <video controls width="1000">
+      <!-- <video controls width="1000">
         <source src="/video.mp4" type="video/mp4" />
-      </video>
+      </video> -->
     </div>
   </div>
 </template>
