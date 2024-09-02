@@ -1,10 +1,8 @@
 <template>
   <div class="header">
-      <img src="/favicon.ico" alt="limu" class="logo">
-      <div class="slogan">
-        limu-paste 页面复制
-      </div>
-    </div>
+    <img src="/favicon.ico" alt="limu" class="logo" />
+    <div class="slogan">limu-paste 页面复制</div>
+  </div>
   <div class="app-wrapper">
     <Sidebar class="sidebar-container" />
     <app-main />
@@ -14,7 +12,6 @@
 <script setup lang="ts">
 import { AppMain } from './components/index';
 import Sidebar from './components/Sidebar/index.vue';
-
 </script>
 
 <style lang="scss" scoped>
@@ -28,7 +25,7 @@ import Sidebar from './components/Sidebar/index.vue';
   }
   .slogan {
     font-size: 16px;
-    font-weight: bold
+    font-weight: bold;
   }
 }
 .app-wrapper {
@@ -39,10 +36,8 @@ import Sidebar from './components/Sidebar/index.vue';
   background: #f4f7fc;
   .sidebar-container {
     box-shadow: 5px 9px 6px 0 rgb(0 21 41 / 12%);
-    width: 300px;
+    width: 230px;
     height: 100%;
   }
 }
-
-
 </style>
