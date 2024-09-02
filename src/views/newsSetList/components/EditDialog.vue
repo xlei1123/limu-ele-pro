@@ -131,6 +131,7 @@ const handleSave = async () => {
   ruleFormRef.value.validate(async (valid) => {
     if (valid) {
       // TODO 请求保存数据
+      console.log('blockData.value==>', blockData.value);
       emit('close');
     }
   });
