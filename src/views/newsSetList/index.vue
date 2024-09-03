@@ -11,7 +11,6 @@
         <el-button type="primary" link @click="handleEdit(blockData)">编辑</el-button>
       </el-descriptions-item>
     </el-descriptions>
-    <EditDialog :editFlag="editFlagHandle" :initBlockData="blockData" @close="handleClose" />
     <el-descriptions title="重置密码消息" :border="true" class="newItem" direction="vertical">
       <el-descriptions-item label="注册成功" class-name="send" label-class-name="setLabel">
         发送
