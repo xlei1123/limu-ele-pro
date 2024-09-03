@@ -35,9 +35,14 @@ export default [
     component: () => import('@/views/newsSetList/index.vue')
   },
   {
+    path: 'articleList',
+    meta: { title: '页面-文章列表' },
+    component: () => import('@/views/listArticle/index.vue')
+  },
+  {
     path: 'limu-dashboard',
     meta: { title: '工作台' },
-    component: () => import('@/views/limu-dashboard/index.vue')
+    component: () => import('@/views/limuDashboard/index.vue')
   },
   {
     path: 'detail1',
