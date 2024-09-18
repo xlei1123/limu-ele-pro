@@ -23,7 +23,7 @@
               </template>
             </el-popover>
           </div>
-          <el-image :src="img.url" lazy />
+          <el-image :src="img.url" lazy @click="previewImage(img)" />
           <div class="name">
             <el-input
               v-model="ImageTitle"
@@ -45,6 +45,7 @@
       layout="->, total, prev, pager, next, sizes, jumper"
       @update="handleUpdate"
     />
+    <ImagePreview :showPreview="showPreview" :url="previewUrl" @close="previewClose" />
   </div>
 </template>
 
@@ -52,6 +53,7 @@
 import { ref, nextTick, watch } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import LimuPagination from '@/components/LimuPagination.vue';
+import ImagePreview from './ImagePreview.vue';
 import Mock from 'mockjs'; // mock数据用 你的页面应该删除mock数据
 
 interface Image {
@@ -90,7 +92,7 @@ const getDataList = async (group: string, currentPage: number, pageSize: number)
     'list|13': [
       {
         title: '@cname', // 中文名
-        url: '/example.png',
+        url: 'http://limu-paste.quchafen.com/example.png',
         id: '@guid' // guid
       }
     ],
@@ -154,6 +156,18 @@ const handleDel = (id: number) => {
         message: '已取消删除'
       });
     });
+};
+
+// 预览
+const showPreview = ref(false);
+const previewUrl = ref();
+const previewImage = (img: Image) => {
+  showPreview.value = true;
+  previewUrl.value = img.url;
+};
+const previewClose = () => {
+  showPreview.value = false;
+  previewUrl.value = undefined;
 };
 </script>
 
