@@ -40,6 +40,11 @@ export default [
     component: () => import('@/views/listArticle/index.vue')
   },
   {
+    path: 'materialLibrary',
+    meta: { title: '页面-素材库' },
+    component: () => import('@/views/materialLibrary/index.vue')
+  },
+  {
     path: 'limu-dashboard',
     meta: { title: '工作台' },
     component: () => import('@/views/limuDashboard/index.vue')

@@ -5,7 +5,7 @@
       :page-size="pageSize"
       :page-sizes="pageSizes"
       :background="background"
-      layout="total, sizes, prev, pager, next, jumper"
+      :layout="layout"
       :total="total"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
