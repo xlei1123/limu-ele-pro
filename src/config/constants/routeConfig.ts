@@ -41,7 +41,7 @@ export default [
   },
   {
     path: 'materialLibrary',
-    meta: { title: '页面-素材库' },
+    meta: { title: '页面-素材库', dependencies: ['LimuPagination.vue'] },
     component: () => import('@/views/materialLibrary/index.vue')
   },
   {
