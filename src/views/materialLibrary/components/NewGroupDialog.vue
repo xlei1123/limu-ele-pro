@@ -22,7 +22,7 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="handleCancel">取消</el-button>
-          <el-button type="primary" @click="handleSave"> 保存 </el-button>
+          <el-button type="primary" @click="handleSave">确定</el-button>
         </span>
       </template>
     </el-dialog>
@@ -46,21 +46,17 @@ const emit = defineEmits(['close']);
 const ruleFormRef = ref<FormInstance>();
 const rules = reactive<FormRules>({
   group: [
-    { required: true, message: '请输入手机号' },
-    { pattern: /^1[0-9]{10}$/, message: '请输入11位手机号' }
+    { required: true, message: '请输入手' },
+    { pattern: /^[\u4e00-\u9fa5A-Za-z0-9_]+$/, message: '仅允许汉字、字母、数字、符号：-' }
   ]
 });
 
-const initData = {
-  group: ''
-};
 // 赋初始值
 const blockData = ref({
-  ...initData
+  group: ''
 });
 
 const handleCancel = () => {
-  blockData.value = { ...initData };
   emit('close');
 };
 const handleSave = async () => {
@@ -73,15 +69,14 @@ const handleSave = async () => {
   });
 };
 const blockDataClose = async () => {
-  blockData.value = { ...initData };
   emit('close');
 };
 </script>
 
 <style scoped lang="scss">
 .block {
-  :deep(.el-form) {
-    width: 100%;
+  :deep(.el-form--inline.el-form--label-top .el-form-item) {
+    flex: 1;
   }
 }
 </style>

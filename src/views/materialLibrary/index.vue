@@ -20,15 +20,18 @@
         </el-button>
       </div>
     </div>
-    <NewGroupDialog :showFlag="showFlagHandle" @close="handleClose" />
-    <ManageGroupDialog :showFlag="showFlagHandle" :initBlockData="groups" @close="handleClose" />
+    <NewGroupDialog :showFlag="newGroupVisible" @close="handleNewGroupClose" />
+    <ManageGroupDialog
+      :showFlag="manageGroupVisible"
+      :initBlockData="groups"
+      @close="handleManageGroupClose"
+    />
     <ImagList :group="activeId" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { ElMessage, ElMessageBox } from 'element-plus';
 import { Setting, Plus } from '@element-plus/icons-vue';
 import ImagList from './components/ImagList.vue';
 import NewGroupDialog from './components/NewGroupDialog.vue';
@@ -52,45 +55,23 @@ const handleClickGroup = (id: string) => {
   activeId.value = id;
 };
 
-// 删除
-const handleDel = (id: number) => {
-  console.log(id);
-  ElMessageBox.confirm('你确定要删除嘛？', '确认提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
-    // type: 'warning',
-    draggable: true
-  })
-    .then(() => {
-      // TODO 确认删除 请求删除接口
-      ElMessage({
-        type: 'success',
-        message: '删除成功'
-      });
-    })
-    .catch(() => {
-      // 取消
-      ElMessage({
-        type: 'info',
-        message: '已取消删除'
-      });
-    });
-};
-
-// 编辑
-const showFlagHandle = ref(false);
-const blockData = ref<any>({});
+// 新建
+const newGroupVisible = ref(false);
 const newGroup = async (data: any) => {
-  showFlagHandle.value = true;
-  blockData.value = data;
+  newGroupVisible.value = true;
+};
+const handleNewGroupClose = async () => {
+  newGroupVisible.value = false;
 };
 
-const handleClose = async () => {
-  blockData.value = {};
-  showFlagHandle.value = false;
+// 管理
+const manageGroupVisible = ref(false);
+const manage = () => {
+  manageGroupVisible.value = true;
 };
-
-const manage = () => {};
+const handleManageGroupClose = async () => {
+  manageGroupVisible.value = false;
+};
 </script>
 
 <style scoped lang="scss">

@@ -15,8 +15,8 @@
           <div class="extra">
             <el-popover trigger="hover" placement="bottom" :width="60" :teleported="false">
               <div class="action">
-                <p>重命名</p>
-                <p>删除</p>
+                <p @click="handleEdit(img)">重命名</p>
+                <p @click="handleDel(img)">删除</p>
               </div>
               <template #reference>
                 <span class="actionBtn">···</span>
@@ -24,7 +24,17 @@
             </el-popover>
           </div>
           <el-image :src="img.url" lazy />
-          <div class="name">{{ img.title }}</div>
+          <div class="name">
+            <el-input
+              v-model="ImageTitle"
+              v-if="reNameId === img.id"
+              ref="inputRef"
+              @change="changeValue"
+              @blur="handleBlur"
+              :autofocus="true"
+            />
+            <div v-else>{{ img.title }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -39,20 +49,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, PropType } from 'vue';
+import { ref, nextTick, watchEffect } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import LimuPagination from '@/components/LimuPagination.vue';
 import Mock from 'mockjs'; // mock数据用 你的页面应该删除mock数据
+import { watch } from 'fs';
 
 interface Image {
   id: number;
   url: string;
   title: string;
 }
-defineProps({
+const props = defineProps({
   group: {
     type: String,
-    defalut: ''
+    defalut: '',
+    required: true
   }
 });
 
@@ -68,13 +80,13 @@ interface Page {
 const handleUpdate = async (page: Page) => {
   currentPage.value = page.currentPage;
   pageSize.value = page.pageSize;
-  await getDataList();
+  await getDataList(props.group, currentPage.value, pageSize.value);
 };
 const listLoading = ref(true);
 // 主页面请求数据
-const getDataList = async () => {
+const getDataList = async (group: string, currentPage: number, pageSize: number) => {
   listLoading.value = true;
-  // TODO 请求
+  // TODO 请求 依赖传入的group 自动更新
   const data = Mock.mock({
     'list|13': [
       {
@@ -91,11 +103,30 @@ const getDataList = async () => {
     listLoading.value = false;
   }, 500);
 };
-getDataList();
+getDataList(props.group, currentPage.value, pageSize.value);
 
-const visible = ref(false);
-const handleImageHover = (id: string) => {
-  visible.value = true;
+watch(props.group, async () => {
+  await getDataList(props.group, currentPage.value, pageSize.value);
+});
+
+const ImageTitle = ref();
+const reNameId = ref();
+const inputRef = ref();
+const handleEdit = (img: Image) => {
+  reNameId.value = img.id;
+  ImageTitle.value = img.title;
+  nextTick(() => {
+    inputRef.value[0]?.focus();
+  });
+};
+
+const handleBlur = () => {
+  reNameId.value = undefined;
+};
+const changeValue = (v: string) => {
+  // TODO 请求数据
+  if (!v) return;
+  reNameId.value = undefined;
 };
 
 // 删除
@@ -121,37 +152,6 @@ const handleDel = (id: number) => {
         message: '已取消删除'
       });
     });
-};
-
-// 编辑
-const editFlagHandle = ref(false);
-const blockData = ref<any>({});
-const handleEdit = async (data: any) => {
-  editFlagHandle.value = true;
-  blockData.value = data;
-};
-
-const handleClose = async () => {
-  blockData.value = {};
-  editFlagHandle.value = false;
-};
-
-// 其他
-const visibleFlag = ref(false);
-const visibleFlagHandle = (_val: string) => {
-  visibleFlag.value = true;
-};
-const visibleFlagClose = async () => {
-  visibleFlag.value = false;
-};
-
-const multipleSelection = ref<any[]>([]);
-const handleSelectionChange = async (val: any[]) => {
-  multipleSelection.value = val;
-};
-const multipleAction = async () => {
-  // TODO 请求接口
-  await getDataList();
 };
 </script>
 
@@ -236,6 +236,7 @@ const multipleAction = async () => {
       }
     }
     .name {
+      height: 26px;
       margin-top: 10px;
       font-size: 14px;
     }
