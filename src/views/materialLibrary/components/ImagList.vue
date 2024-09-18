@@ -49,11 +49,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick, watchEffect } from 'vue';
+import { ref, nextTick, watch } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import LimuPagination from '@/components/LimuPagination.vue';
 import Mock from 'mockjs'; // mock数据用 你的页面应该删除mock数据
-import { watch } from 'fs';
 
 interface Image {
   id: number;
@@ -105,9 +104,12 @@ const getDataList = async (group: string, currentPage: number, pageSize: number)
 };
 getDataList(props.group, currentPage.value, pageSize.value);
 
-watch(props.group, async () => {
-  await getDataList(props.group, currentPage.value, pageSize.value);
-});
+watch(
+  () => props.group,
+  async () => {
+    await getDataList(props.group, currentPage.value, pageSize.value);
+  }
+);
 
 const ImageTitle = ref();
 const reNameId = ref();
